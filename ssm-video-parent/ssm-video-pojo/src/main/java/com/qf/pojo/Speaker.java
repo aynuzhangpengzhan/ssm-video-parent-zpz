@@ -12,6 +12,7 @@ public class Speaker {
 
     private String headImgUrl;
 
+
     private String speakerDesc;
 
 }

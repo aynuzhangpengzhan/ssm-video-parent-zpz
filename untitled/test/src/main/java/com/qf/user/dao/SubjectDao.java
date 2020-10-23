@@ -13,6 +13,5 @@ import java.util.List;
 public interface SubjectDao {
     List<Subject> findAll();
 
-
     Subject findSubject(Integer Id);
 }
