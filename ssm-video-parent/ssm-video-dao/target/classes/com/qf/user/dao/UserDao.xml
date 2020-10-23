@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.user.dao.UserDao">
+    <resultMap id="BaseResultMap" type="com.qf.pojo.User">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="phoneNum" jdbcType="VARCHAR" property="phonenum" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="code" jdbcType="VARCHAR" property="code" />
+        <result column="nickName" jdbcType="VARCHAR" property="nickName" />
+        <result column="sex" jdbcType="VARCHAR" property="sex" />
+        <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="imgUrl" jdbcType="VARCHAR" property="imgUrl" />
+        <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, email, phoneNum, password, code, nickName, sex, birthday, address, imgUrl, createTime
+  </sql>
+    <select id="findUser"  resultMap="BaseResultMap">
+        select
+        *
+        from user
+        where email = #{email} and password = #{password}
+    </select>
+
+
+    <select id="findUserByEmail"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from user
+        where email = #{email}
+    </select>
+
+    <insert id="insertUser" parameterType="com.qf.pojo.User">
+    insert into user ( email,
+      password, code)
+    values ( #{email,jdbcType=VARCHAR},
+      #{password,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}
+       )
+  </insert>
+    <update id="updateUser" parameterType="com.qf.pojo.User">
+        update user
+        <set>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phonenum != null">
+                phoneNum = #{phonenum,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                nickName = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="imgUrl != null">
+                imgUrl = #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                createTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
